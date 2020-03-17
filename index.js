@@ -1,55 +1,48 @@
 let stack = [];
 let a = 5;
 let b = 2;
+let str = "";
 let operator = '+';
-console.log(typeof(a));
-console.log(typeof(operator));
 pushToStack(a);
 pushToStack(b);
 pushToStack(operator);
 operator = '-';
 pushToStack(10);
 pushToStack(operator);
-console.log(stack);
-console.log(stack.pop());
 
 function pushToStack(el) {
     if(typeof(el) === "number")
     {
+        str += el + ' ';
         stack.push(el)
     }
     else if(typeof(el) === "string")
     {
+        str += el + ' ';
         if(stack.length > 1)
         {
+            str += '=';
             let first = stack.pop();
             let second = stack.pop();
+            let result;
             if(el === '+')
             {
-                let result = first + second;
-                stack.push(result);
+                result = first + second;
             }
             else if(el === '-')
             {
-                let result = first - second;
-                stack.push(result);
+                result = first - second;
             }
             else if(el === '*')
             {
-                let result = first * second;
-                stack.push(result);
+                result = first * second;
             }
             else if(el === '/')
             {
-                let result = first / second;
-                stack.push(result);
+                result = first / second;
             }
+            pushToStack(result);
         }
-    }
-    let str = "";
-    for(let i = 0;i < stack.length; i++)
-    {
-        str += stack[i]+' ';
     }
     console.log(str);
 }
